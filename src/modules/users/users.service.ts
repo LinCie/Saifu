@@ -20,8 +20,8 @@ export class UsersService {
     return user;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.em.findAll(User);
   }
 
   findOne(id: number) {
