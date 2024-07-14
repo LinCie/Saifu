@@ -13,7 +13,7 @@ export class CreateUserDto {
   @Matches(/^\S*$/, {
     message: 'Username should not contain spaces',
   })
-  username: string;
+  readonly username: string;
 
   @IsNotEmpty()
   @IsString()
@@ -22,5 +22,5 @@ export class CreateUserDto {
     message:
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
   })
-  password: string;
+  readonly password: string;
 }
