@@ -7,7 +7,7 @@ export default class User extends BaseEntity {
   @Unique()
   username: string;
 
-  @Property()
+  @Property({ hidden: true })
   hash: string;
 
   constructor(username: string, hash: string) {
