@@ -1,11 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { EntityManager, MikroORM } from '@mikro-orm/mongodb';
+import User from '@/entities/User.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    private readonly orm: MikroORM,
+    private readonly em: EntityManager,
+  ) {}
+
+  async create(createUserDto: CreateUserDto) {
+    const hash = await bcrypt.hash(createUserDto.password, 10);
+    const user = new User(createUserDto.username, hash);
+    await this.em.persistAndFlush(user);
+
+    return user;
   }
 
   findAll() {
