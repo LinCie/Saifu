@@ -24,8 +24,8 @@ export class UsersService {
     return await this.em.findAll(User);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(username: string) {
+    return this.em.findOneOrFail(User, { username });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

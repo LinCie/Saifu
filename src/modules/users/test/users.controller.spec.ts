@@ -51,4 +51,17 @@ describe('UsersController', () => {
     const result = await controller.findAll();
     expect(result).toEqual(mockUsers);
   });
+
+  it('should find user by username', async () => {
+    const mockUsers: User[] = [
+      new User('username', 'password'),
+      new User('username2', 'password'),
+      new User('username3', 'password'),
+    ];
+
+    jest.spyOn(service, 'findOne').mockResolvedValue(mockUsers[0]);
+
+    const result = await controller.findOne('username');
+    expect(result).toEqual(mockUsers[0]);
+  });
 });

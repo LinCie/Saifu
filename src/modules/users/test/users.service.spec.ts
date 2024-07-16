@@ -18,6 +18,7 @@ describe('UsersService', () => {
         if (token === EntityManager) {
           return {
             findAll: jest.fn(),
+            findOneOrFail: jest.fn(),
             persistAndFlush: jest.fn(),
           };
         }
@@ -55,5 +56,18 @@ describe('UsersService', () => {
 
     const result = await service.findAll();
     expect(result).toEqual(mockUsers);
+  });
+
+  it('should find user by username', async () => {
+    const mockUsers: User[] = [
+      new User('username', 'password'),
+      new User('username2', 'password'),
+      new User('username3', 'password'),
+    ];
+
+    jest.spyOn(em, 'findOneOrFail').mockResolvedValue(mockUsers[0]);
+
+    const result = await service.findOne('username');
+    expect(result).toEqual(mockUsers[0]);
   });
 });
