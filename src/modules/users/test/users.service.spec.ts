@@ -23,6 +23,7 @@ describe('UsersService', () => {
             assign: jest.fn(),
             findOne: jest.fn(),
             flush: jest.fn(),
+            removeAndFlush: jest.fn(),
           };
         }
         if (typeof token === 'function') {
@@ -83,5 +84,10 @@ describe('UsersService', () => {
       username: 'updateduser12',
     });
     expect(result).toEqual(mockNewUser);
+  });
+
+  it('should delete user', async () => {
+    const mockNewUser = new User('newuser123', 'password');
+    expect(await service.remove(mockNewUser.id));
   });
 });

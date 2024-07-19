@@ -75,4 +75,9 @@ describe('UsersController', () => {
     });
     expect(result).toEqual(mockNewUser);
   });
+
+  it('should delete user', async () => {
+    const mockNewUser = new User('newuser123', 'password');
+    expect(await controller.remove(mockNewUser.id));
+  });
 });

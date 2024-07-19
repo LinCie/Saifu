@@ -37,7 +37,9 @@ export class UsersService {
     return await this.em.findOne(User, { id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const user = await this.em.findOneOrFail(User, { id });
+    await this.em.removeAndFlush(user);
+    return;
   }
 }
