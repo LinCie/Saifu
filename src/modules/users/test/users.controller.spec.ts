@@ -64,4 +64,15 @@ describe('UsersController', () => {
     const result = await controller.findOne('username');
     expect(result).toEqual(mockUsers[0]);
   });
+
+  it('should update user', async () => {
+    const mockNewUser = new User('newuser123', 'password');
+
+    jest.spyOn(service, 'update').mockResolvedValue(mockNewUser);
+
+    const result = await service.update(mockNewUser.id, {
+      username: 'updateduser12',
+    });
+    expect(result).toEqual(mockNewUser);
+  });
 });

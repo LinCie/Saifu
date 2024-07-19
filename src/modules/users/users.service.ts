@@ -28,8 +28,13 @@ export class UsersService {
     return this.em.findOneOrFail(User, { username });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.em.findOneOrFail(User, { id });
+
+    this.em.assign(user, updateUserDto);
+    await this.em.flush();
+
+    return await this.em.findOne(User, { id });
   }
 
   remove(id: number) {
