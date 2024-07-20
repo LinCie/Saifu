@@ -7,7 +7,7 @@ import {
 import { ObjectId } from '@mikro-orm/mongodb';
 
 @Entity()
-export default class BaseEntity {
+export class BaseEntity {
   @PrimaryKey()
   _id: ObjectId;
 
