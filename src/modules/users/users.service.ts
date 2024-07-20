@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { EntityManager, MikroORM } from '@mikro-orm/mongodb';
-import User from '@/entities/User.entity';
+import { User } from '@/entities';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
