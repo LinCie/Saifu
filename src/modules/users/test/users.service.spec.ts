@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '../users.service';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
-import User from '@/entities/User.entity';
 import { EntityManager } from '@mikro-orm/mongodb';
+import { User } from '@/entities';
 
 const moduleMocker = new ModuleMocker(global);
 
