@@ -42,4 +42,8 @@ export class UsersService {
     await this.em.removeAndFlush(user);
     return;
   }
+
+  async findOneById(id: string) {
+    return this.em.findOneOrFail(User, { id });
+  }
 }

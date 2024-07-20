@@ -90,4 +90,10 @@ describe('UsersService', () => {
     const mockNewUser = new User('newuser123', 'password');
     expect(await service.remove(mockNewUser.id));
   });
+
+  it('should find user by id', async () => {
+    const mockNewUser = new User('newuser123', 'password');
+    jest.spyOn(em, 'findOneOrFail').mockResolvedValue(mockNewUser);
+    expect(await service.findOneById(mockNewUser.id)).toEqual(mockNewUser);
+  });
 });
