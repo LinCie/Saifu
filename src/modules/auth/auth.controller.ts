@@ -1,13 +1,37 @@
-import { Controller, Post, Request, UseGuards, Version } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Request,
+  UseGuards,
+  Version,
+} from '@nestjs/common';
 import { RequestWithUser } from './interface/RequestWithUser';
-import { LocalAuthGuard } from '@/guards';
+import { JwtRefreshGuard, LocalAuthGuard } from '@/guards';
+import { AuthService } from './auth.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Controller('auth')
 export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
   @Post('signin')
   @Version('1')
   @UseGuards(LocalAuthGuard)
   async signIn(@Request() req: RequestWithUser) {
-    return req.user;
+    return this.authService.signIn(req.user);
+  }
+
+  @Post('signup')
+  @Version('1')
+  async signUp(@Body() body: CreateUserDto) {
+    return this.signUp(body);
+  }
+
+  @Post('refresh')
+  @Version('1')
+  @UseGuards(JwtRefreshGuard)
+  async refresh(@Request() req: RequestWithUser) {
+    return this.authService.refresh(req.user);
   }
 }
