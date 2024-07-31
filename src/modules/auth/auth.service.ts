@@ -3,10 +3,14 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { User } from '@/entities';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async validateUser(createUserDto: CreateUserDto) {
     const user = await this.usersService.findOne(createUserDto.username);
@@ -27,6 +31,11 @@ export class AuthService {
   }
 
   async signIn(user: User) {
-    return user.id;
+    const payload = { sub: user.id, username: user.username };
+    return {
+      user,
+      access_token: this.jwtService.sign(payload),
+      refresh_token: this.jwtService.sign(payload, { expiresIn: '30d' }),
+    };
   }
 }
