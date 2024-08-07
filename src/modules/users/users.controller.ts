@@ -28,10 +28,10 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':username')
+  @Get(':id')
   @Version('1')
-  findOne(@Param('username') username: string) {
-    return this.usersService.findOne(username);
+  findOne(@Param('id') id: string) {
+    return this.usersService.findOneById(id);
   }
 
   @Patch(':id')
