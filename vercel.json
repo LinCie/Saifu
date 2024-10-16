@@ -1,6 +1,5 @@
 {
   "buildCommand": "nest build",
-  "cleanUrls": true,
   "outputDirectory": "dist",
   "routes": [
     {
