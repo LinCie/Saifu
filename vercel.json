@@ -2,10 +2,16 @@
   "buildCommand": "nest build",
   "cleanUrls": true,
   "outputDirectory": "dist",
-  "redirects": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "main.js"
+      "src": "/(.*)",
+      "dest": "main.js",
+      "methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ]
     }
   ]
 }
