@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from '../users.controller';
 import { UsersService } from '../users.service';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
-import { User } from '@/entities';
+import { User } from '../../../entities';
 
 const moduleMocker = new ModuleMocker(global);
 

@@ -7,7 +7,7 @@ import {
   Version,
 } from '@nestjs/common';
 import { RequestWithUser } from './interface/RequestWithUser';
-import { JwtRefreshGuard, LocalAuthGuard } from '@/guards';
+import { JwtRefreshGuard, LocalAuthGuard } from '../../guards';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 
