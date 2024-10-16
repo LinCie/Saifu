@@ -2,7 +2,7 @@
   "buildCommand": "nest build",
   "outputDirectory": "dist",
   "functions": {
-    "api/dist/main.js": {
+    "main.js": {
       "memory": 512,
       "maxDuration": 10
     }
@@ -10,7 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/dist/main.js"
+      "dest": "main.js"
     }
   ]
 }
